@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="de.finsandcode.tauchtrainer.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_pool"
+        android:name="de.finsandcode.tauchtrainer.PoolExercisesFragment"
+        android:label="Hallenbad-Übungen"
+        tools:layout="@layout/fragment_pool_exercises" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="de.finsandcode.tauchtrainer.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_openwater"
+        android:name="de.finsandcode.tauchtrainer.OpenWaterExercisesFragment"
+        android:label="Freiwasser-Übungen"
+        tools:layout="@layout/fragment_open_water_exercises" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="de.finsandcode.tauchtrainer.SettingsFragment"
+        android:label="Einstellungen"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
