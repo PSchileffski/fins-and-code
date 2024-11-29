@@ -12,4 +12,9 @@
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Weitere Strings -->
+    <string name="nav_pool_exercises">Hallenbad-Übungen</string>
+    <string name="nav_open_water_exercises">Freiwasser-Übungen</string>
+    <string name="nav_settings">Einstellungen</string>
 </resources>

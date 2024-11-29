@@ -7,13 +7,21 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import de.finsandcode.tauchtrainer.databinding.ActivityMainBinding
 import de.finsandcode.tauchtrainer.PoolExercisesFragment
 import de.finsandcode.tauchtrainer.OpenWaterExercisesFragment
 import de.finsandcode.tauchtrainer.SettingsFragment
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +34,28 @@ class MainActivity : AppCompatActivity() {
         // Toolbar einrichten
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        // Floating Action Button (falls benötigt)
-        /*binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-        }*/
-
-        // Drawer und Navigation einrichten
+        // DrawerLayout und ActionBarDrawerToggle einrichten
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+
+        // ActionBarDrawerToggle initialisieren
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, binding.appBarMain.toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Navigation Controller
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+        // Navigation mit AppBarConfiguration einrichten
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.nav_pool_exercises, R.id.nav_open_water_exercises, R.id.nav_settings),
+            drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
         // Listener für Navigation Drawer-Menüpunkte
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -52,6 +72,13 @@ class MainActivity : AppCompatActivity() {
             }
             drawerLayout.closeDrawer(GravityCompat.START) // Drawer nach Auswahl schließen
             true
+        }
+
+        // Floating Action Button (falls benötigt)
+        binding.appBarMain.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .setAnchorView(R.id.fab).show()
         }
     }
 
