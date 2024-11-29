@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_pool_exercises"
+            android:title="Hallenbad-Übungen"
+            android:icon="@drawable/ic_pool" />
+        <item
+            android:id="@+id/nav_open_water_exercises"
+            android:title="Freiwasser-Übungen"
+            android:icon="@drawable/ic_open_water" />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="Einstellungen"
+            android:icon="@drawable/ic_settings" />
+    </group>
+</menu>
