@@ -1,7 +1,7 @@
 package de.finsandcode.tauchtrainer
 
 import android.os.Bundle
-import android.view.Menu
+//import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -65,11 +65,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+/* Deactivated options menu for now
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Menü der Toolbar laden
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
+*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Holen des NavController

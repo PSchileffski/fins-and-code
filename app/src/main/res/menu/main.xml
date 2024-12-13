@@ -2,27 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Menüeintrag für Home -->
-    <item
-        android:id="@+id/homeFragment"
-        android:orderInCategory="1"
-        android:title="@string/menu_home"
-        app:showAsAction="never" />
-
-    <!-- Menüeintrag für Open Water Exercises -->
-    <item
-        android:id="@+id/openWaterExercisesFragment"
-        android:orderInCategory="2"
-        android:title="@string/menu_open_water_exercises"
-        app:showAsAction="never" />
-
-    <!-- Menüeintrag für Pool Exercises -->
-    <item
-        android:id="@+id/poolExercisesFragment"
-        android:orderInCategory="3"
-        android:title="@string/menu_pool_exercises"
-        app:showAsAction="never" />
-
     <!-- Menüeintrag für Settings -->
     <item
         android:id="@+id/settingsFragment"
