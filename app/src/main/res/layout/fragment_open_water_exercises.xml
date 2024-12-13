@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_open_water_exercises"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Freiwasser-Übungen"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</LinearLayout>
+        <!-- Überschrift -->
+        <TextView
+            android:id="@+id/text_open_water_exercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Freiwasser-Übungen"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Beispielinhalt: Übungsliste -->
+        <TextView
+            android:id="@+id/text_exercise_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beschreibung der Übungen:"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_exercise_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Maske ausblasen\n2. Tarierung üben\n3. Notaufstieg simulieren"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Button für weitere Aktionen -->
+        <Button
+            android:id="@+id/button_start_exercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Übungen starten"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

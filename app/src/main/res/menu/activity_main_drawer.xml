@@ -9,16 +9,16 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_pool_exercises"
-            android:title="Hallenbad-Übungen"
+            android:id="@+id/nav_pool"
+            android:title="@string/menu_pool_exercises"
             android:icon="@drawable/ic_pool" />
         <item
-            android:id="@+id/nav_open_water_exercises"
-            android:title="Freiwasser-Übungen"
+            android:id="@+id/nav_openwater"
+            android:title="@string/menu_open_water_exercises"
             android:icon="@drawable/ic_open_water" />
         <item
             android:id="@+id/nav_settings"
-            android:title="Einstellungen"
+            android:title="@string/menu_settings"
             android:icon="@drawable/ic_settings" />
     </group>
 </menu>
