@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
 
         // Hier kannst du deine Daten direkt festlegen oder verarbeiten
         val textView: TextView = binding.textHome
-        textView.text = "Willkommen zu den Freiwasser Übungen!" // Beispieltext
+        textView.text = "Willkommen in der App für Tauchtrainer!" // Beispieltext
 
         return root
     }
