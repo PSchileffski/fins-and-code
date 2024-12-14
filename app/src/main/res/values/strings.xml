@@ -20,4 +20,5 @@
     <string name="nav_pool_exercises">Hallenbad-Übungen</string>
     <string name="nav_open_water_exercises">Freiwasser-Übungen</string>
     <string name="nav_settings">Einstellungen</string>
+    <string name="button_add_exercise">Übung hinzufügen</string>
 </resources>
