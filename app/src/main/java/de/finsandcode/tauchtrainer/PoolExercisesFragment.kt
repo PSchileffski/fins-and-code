@@ -1,49 +1,69 @@
 package de.finsandcode.tauchtrainer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.finsandcode.tauchtrainer.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import de.finsandcode.tauchtrainer.databinding.FragmentPoolExercisesBinding
+import de.finsandcode.tauchtrainer.ui.ExerciseViewModel
+import de.finsandcode.tauchtrainer.adapter.ExerciseAdapter
+import de.finsandcode.tauchtrainer.model.Exercise
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PoolExercisesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PoolExercisesFragment : Fragment() {
+
+    // ViewModel für die Datenbankoperationen
+    private val exerciseViewModel: ExerciseViewModel by activityViewModels()
+
+    // Binding-Objekt, um auf die UI-Elemente zuzugreifen (falls ViewBinding verwendet wird)
+    private var _binding: FragmentPoolExercisesBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pool_exercises, container, false)
+        _binding = FragmentPoolExercisesBinding.inflate(inflater, container, false)
+        val rootView = binding.root
+
+        // RecyclerView einrichten
+        val recyclerView = binding.exerciseRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // Beobachte die Liste der Übungen im ViewModel
+        exerciseViewModel.allExercises.observe(viewLifecycleOwner, Observer { exercises ->
+            // Wenn die Liste der Übungen aktualisiert wird, Adapter setzen
+            val adapter = ExerciseAdapter(exercises)
+            recyclerView.adapter = adapter
+        })
+
+        // Beispiel: Füge eine Übung in die Datenbank ein, sobald das Fragment erstellt wird
+        val exercise = Exercise(name = "Kraulen", description = "Schwimmtechnik", duration = 60)
+
+        // Die Methode aus dem ViewModel aufrufen, um die Übung hinzuzufügen
+        lifecycleScope.launch {
+            exerciseViewModel.addExercise(exercise)
+        }
+
+        // Beispiel: Setze eine Aktion, z.B. ein Button, um eine Übung hinzuzufügen
+        binding.addExerciseButton.setOnClickListener {
+            val newExercise = Exercise(name = "Brustschwimmen", description = "Schwimmtechnik", duration = 45)
+            lifecycleScope.launch {
+                exerciseViewModel.addExercise(newExercise)
+            }
+        }
+
+        return rootView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PoolExercisesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PoolExercisesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    // Stelle sicher, dass du das Binding freigibst, wenn das Fragment nicht mehr benötigt wird
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -13,11 +13,22 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import de.finsandcode.tauchtrainer.databinding.ActivityMainBinding
 import androidx.appcompat.app.ActionBarDrawerToggle
+import android.content.Context
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.room.Room
+import de.finsandcode.tauchtrainer.adapter.ExerciseAdapter
+import de.finsandcode.tauchtrainer.data.AppDatabase
+import de.finsandcode.tauchtrainer.model.Exercise
+import de.finsandcode.tauchtrainer.ui.ExerciseViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    // ViewModel für die Datenbankoperationen
+    private val exerciseViewModel: ExerciseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +60,14 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Beobachte die Liste der Übungen im ViewModel
+        exerciseViewModel.allExercises.observe(this, Observer { exercises ->
+            // Hier kannst du mit der 'exercises' Liste weiterarbeiten
+            // Zum Beispiel kannst du den RecyclerView hier mit dem Adapter verbinden
+            val adapter = ExerciseAdapter(exercises)
+            // recyclerView.adapter = adapter (Falls du ein RecyclerView hast)
+        })
+
         // DrawerToggle einrichten
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, binding.appBarMain.toolbar,
@@ -64,14 +83,6 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab).show()
         }
     }
-
-/* Deactivated options menu for now
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Menü der Toolbar laden
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Holen des NavController
