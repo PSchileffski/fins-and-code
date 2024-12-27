@@ -31,35 +31,20 @@ class PoolExercisesFragment : Fragment() {
         _binding = FragmentPoolExercisesBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        // RecyclerView einrichten
         val recyclerView = binding.exerciseRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Beobachte die Liste der Übungen im ViewModel
-        exerciseViewModel.allExercises.observe(viewLifecycleOwner, Observer { exercises ->
-            // Wenn die Liste der Übungen aktualisiert wird, Adapter setzen
-            val adapter = ExerciseAdapter(exercises)
-            recyclerView.adapter = adapter
-        })
-
-        // Beispiel: Füge eine Übung in die Datenbank ein, sobald das Fragment erstellt wird
-        val exercise = Exercise(name = "Kraulen", description = "Schwimmtechnik", duration = 60)
-
-        // Die Methode aus dem ViewModel aufrufen, um die Übung hinzuzufügen
-        lifecycleScope.launch {
-            exerciseViewModel.addExercise(exercise)
-        }
-
-        // Beispiel: Setze eine Aktion, z.B. ein Button, um eine Übung hinzuzufügen
-        binding.addExerciseButton.setOnClickListener {
-            val newExercise = Exercise(name = "Brustschwimmen", description = "Schwimmtechnik", duration = 45)
-            lifecycleScope.launch {
-                exerciseViewModel.addExercise(newExercise)
+        // StateFlow beobachten und RecyclerView aktualisieren
+        viewLifecycleOwner.lifecycleScope.launch {
+            exerciseViewModel.allExercises.collect { exercises ->
+                val adapter = ExerciseAdapter(exercises)
+                recyclerView.adapter = adapter
             }
         }
 
         return rootView
     }
+
 
     // Stelle sicher, dass du das Binding freigibst, wenn das Fragment nicht mehr benötigt wird
     override fun onDestroyView() {

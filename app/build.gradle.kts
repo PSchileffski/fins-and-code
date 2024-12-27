@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "de.finsandcode.tauchtrainer"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "de.finsandcode.tauchtrainer"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,8 +43,7 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx.v1150)
+    implementation(libs.androidx.core.ktx.v1131)
     implementation(libs.androidx.appcompat.v170)
     implementation(libs.material.v190)
     implementation(libs.androidx.constraintlayout.v220)
@@ -52,6 +51,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx.v287)
     implementation(libs.androidx.navigation.fragment.ktx.v285)
     implementation(libs.androidx.navigation.ui.ktx.v285)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx.v262) // viewModelScope
+    implementation (libs.kotlinx.coroutines.android) // Coroutines
 
     // Room Abhängigkeiten
     implementation(libs.androidx.room.runtime)
@@ -63,4 +64,10 @@ dependencies {
     // Test und Android Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit.v121)
+}
+
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas") // Hier geben wir das Verzeichnis an
+    }
 }

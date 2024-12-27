@@ -9,13 +9,11 @@ import de.finsandcode.tauchtrainer.model.Exercise
 @Dao
 interface ExerciseDao {
 
-    @Insert
-    suspend fun insert(exercise: Exercise)
+    //@Insert
+    //suspend fun insert(exercise: Exercise)
 
     @Query("SELECT * FROM exercise_table")
-    //suspend fun getAllExercises(): List<Exercise>
-    fun getAllExercises(): LiveData<List<Exercise>>  // Gibt LiveData zurück
+    suspend fun getAllExercises(): List<Exercise>  // Direkte Liste, kein LiveData / Suspend-Methode
+    /*fun getAllExercises(): LiveData<List<Exercise>>  // Gibt LiveData zurück*/
 
-    @Query("DELETE FROM exercise_table")
-    suspend fun deleteAll()
 }
